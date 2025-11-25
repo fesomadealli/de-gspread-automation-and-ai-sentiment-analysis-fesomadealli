@@ -1,0 +1,26 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+
+# Credentials
+service_account.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Credentials directory
+creds/
+
+# OS
+.DS_Store
+Thumbs.db
