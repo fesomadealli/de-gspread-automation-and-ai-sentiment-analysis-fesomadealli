@@ -45,12 +45,23 @@ class Sheets:
 
     def protect_worksheet(self, worksheet):
         """Protect worksheet from edits by other users."""
-        worksheet.protect()
+        body = {
+                    "requests": [
+                        {
+                            "addProtectedRange": {
+                                "protectedRange": {
+                                    "range": {
+                                        "sheetId": worksheet.id,
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+        self.sheet.batch_update(body)
         
 if __name__ == "__main__":
-    sheets = Sheets()
-    # df = sheets.read_data(Config.INPUT_SHEET_NAME)
-    # print(df.head())   
+    sheets = Sheets() 
     test_ws = sheets.create_worksheet(sheets.sheet, "Test_Worksheet")
     print("Worksheet created or already exists.")
     sheets.protect_worksheet(test_ws)

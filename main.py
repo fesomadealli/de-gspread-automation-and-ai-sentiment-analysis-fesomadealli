@@ -2,7 +2,7 @@
 
 from src.utils import Sheets
 from src.etl import ETL
-from src.analysis import add_ai_columns, write_processed, perform_analysis
+from src.analysis import add_ai_columns, write_processed
 
 def run_pipeline(dataset_path: str):
     sheets = Sheets()
@@ -10,11 +10,11 @@ def run_pipeline(dataset_path: str):
 
     raw_df = etl.load_raw_data(dataset_path)
     staging_df = etl.stage_data()
-
     ai_df = add_ai_columns(staging_df)
-    processed_df = write_processed(sheets.sheet, ai_df)
+    processed_data = etl.process_data(df=ai_df)
+    processed_df = write_processed(sheets.sheet, processed_data)
     
-    return raw_df, staging_df
+    return processed_df #raw_df, staging_df
 
 
 if __name__ == "__main__":
